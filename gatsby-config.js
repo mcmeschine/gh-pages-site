@@ -56,7 +56,7 @@ module.exports = {
       options: {
         name: 'Gatsby Shop App',
         short_name: 'Shop App',
-        start_url: '/',
+        start_url: '/gh-pages-site',
         background_color: '#ffffff',
         theme_color: '#ffffff',
         display: 'minimal-ui',
