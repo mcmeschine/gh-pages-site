@@ -9,7 +9,7 @@ module.exports = {
     description: 'A starter e-commerce site made using Gatsby.',
     siteUrl: 'https://parmsang.github.io/gatsby-starter-ecommerce/',
   },
-  pathPrefix: '/gatsby-starter-ecommerce',
+  pathPrefix: '/gh-pages-site',
   plugins: [
     {
       resolve: '@moltin/gatsby-source-moltin',
