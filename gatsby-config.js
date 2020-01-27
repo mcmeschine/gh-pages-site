@@ -20,6 +20,17 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-source-strapi',
+      options: {
+        apiURL: 'http://192.168.1.25:1337',
+        contentTypes: [ // List of the Content Types you want to be able to request from Gatsby.
+          'boissons',
+          'categories'
+        ],
+        queryLimit: 1000,
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/src/pages`,
