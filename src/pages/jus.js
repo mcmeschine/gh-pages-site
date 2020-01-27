@@ -26,9 +26,9 @@ export default () => {
               }
               image {
                 childImageSharp {
-                    fluid(maxWidth: 1200) {
-                        ...GatsbyImageSharpFluid
-                    }
+                  sizes(maxWidth: 100) {
+                    ...GatsbyImageSharpSizes
+                  }
                 }
               }
               Instructions
@@ -54,7 +54,10 @@ export default () => {
     <Card.Group itemsPerRow={3} stackable >
     {data.allStrapiBoissons.nodes.map(document => ( 
     <Card>
-      {/* <Image src="{document.image.childImageSharp.fluid.src}" wrapped ui={false} /> */}
+      {/* <h1>{document.image.childImageSharp.sizes}</h1> */}
+      <Image>
+          <Img sizes={document.image.childImageSharp.sizes}  />
+      </Image>
       <Card.Content>
         <Card.Header>{document.Titre}</Card.Header>
         <Card.Meta>{document.bienfaits}</Card.Meta>
