@@ -26,7 +26,7 @@ export default () => {
               }
               image {
                 childImageSharp {
-                  sizes(maxWidth: 100) {
+                  sizes(maxWidth: 600) {
                     ...GatsbyImageSharpSizes
                   }
                 }
