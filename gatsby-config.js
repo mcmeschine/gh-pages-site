@@ -9,7 +9,7 @@ module.exports = {
     description: 'A starter e-commerce site made using Gatsby.',
     siteUrl: 'https://parmsang.github.io/gatsby-starter-ecommerce/',
   },
-  pathPrefix: '/gh-pages-site',
+  pathPrefix: '/jus',
   plugins: [
     {
       resolve: '@moltin/gatsby-source-moltin',
@@ -23,9 +23,10 @@ module.exports = {
       resolve: 'gatsby-source-strapi',
       options: {
         apiURL: 'http://192.168.1.25:1337',
-        contentTypes: [ // List of the Content Types you want to be able to request from Gatsby.
+        contentTypes: [
+          // List of the Content Types you want to be able to request from Gatsby.
           'boissons',
-          'categories'
+          'categories',
         ],
         queryLimit: 1000,
       },
@@ -67,7 +68,7 @@ module.exports = {
       options: {
         name: 'Gatsby Shop App',
         short_name: 'Shop App',
-        start_url: '/gh-pages-site',
+        start_url: '/jus',
         background_color: '#ffffff',
         theme_color: '#ffffff',
         display: 'minimal-ui',

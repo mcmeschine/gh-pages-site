@@ -1,84 +1,70 @@
-import React from "react"
-import { useStaticQuery, graphql, } from "gatsby"
-import {Card, Image} from 'semantic-ui-react'
-import Img from 'gatsby-image'
-//import JuiceList from '../components/JuiceList'
-//import {Link} from "gatsby"
+import React from 'react'
+import {graphql, useStaticQuery} from 'gatsby'
+import get from 'lodash/get'
+import {Image, Header} from 'semantic-ui-react'
+import JuiceList from '../components/JuiceList'
+import SEO from '../components/SEO'
+import logo from '../images/ill-short-dark.svg'
+import Layout from '../components/Layout'
 
-export default () => {
+const StoreIndexJuice = ({location}) => {
   const data = useStaticQuery(graphql`
-    query JusQyuery {
-        site {
-            siteMetadata {
-              title
+    query IndexJuiceQuery {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+      allStrapiBoissons {
+        nodes {
+          id
+          Titre
+          Description
+          bienfaits
+          Consommer
+          Composition {
+            Quantity
+            unity
+            IngredientName
+          }
+          image {
+            childImageSharp {
+              sizes(maxHeight: 150) {
+                ...GatsbyImageSharpSizes
+              }
             }
           }
-          allStrapiBoissons {
-            nodes {
-              id
-              Titre
-              Description
-              bienfaits
-              Composition {
-                Quantity
-                unity
-                IngredientName
-              }
-              image {
-                childImageSharp {
-                  sizes(maxWidth: 600) {
-                    ...GatsbyImageSharpSizes
-                  }
-                }
-              }
-              Instructions
-            }
-          }
+          Instructions
+        }
+      }
     }
   `)
+
+  const siteTitle = get(data, 'site.siteMetadata.title')
+  const juices = get(data, 'allStrapiBoissons')
   return (
-    <header>
-      <h1>{data.site.siteMetadata.title}</h1>
-      {/* <li>{data.allStrapiBoissons.nodes.Titre}</li> */}
-      {/* <JuiceList juices={data.allStrapiBoissons.nodes} /> */}
-      {/* <ul>
-      {data.allStrapiBoissons.nodes.map(document => (
-        <li key={document.id}>
-          <h2>
-            <Link to={`/${document.id}`}>{document.Titre}</Link>
-          </h2>
-          <p>{document.Description}<br/>{document.bienfaits}</p>
-        </li>
-      ))}
-    </ul> */}
-    <Card.Group itemsPerRow={3} stackable >
-    {data.allStrapiBoissons.nodes.map(document => ( 
-    <Card>
-      {/* <h1>{document.image.childImageSharp.sizes}</h1> */}
-      <Image>
-          <Img sizes={document.image.childImageSharp.sizes}  />
-      </Image>
-      <Card.Content>
-        <Card.Header>{document.Titre}</Card.Header>
-        <Card.Meta>{document.bienfaits}</Card.Meta>
-        <Card.Description>
-          {document.Description}<br/>
-          <ul>
-          {document.Composition.map(compo => (
-            <li key={compo.IngredientName}>
-                <p>{compo.Quantity} {compo.unity} {compo.IngredientName}</p>
-            </li>
-           ))}
-          </ul>
-          {/* <Image>
-              <Img sizes={document.image.childImageSharp.fluid.sizes} alt={document.Titre} />
-          </Image> */}
-          {document.Instructions}
-        </Card.Description>
-      </Card.Content>
-    </Card>
-    ))}
-    </Card.Group>
-    </header>
+    <Layout location={location}>
+      <SEO title={siteTitle} />
+      <Header
+        as="h3"
+        icon
+        textAlign="center"
+        style={{
+          marginBottom: '2em',
+        }}
+      >
+        <Header.Content
+          style={{
+            width: '60%',
+            margin: '0 auto',
+          }}
+        >
+          <Image src={logo} alt="logo" />
+        </Header.Content>
+      </Header>
+      <JuiceList juices={juices} />
+    </Layout>
   )
 }
+
+export default StoreIndexJuice
